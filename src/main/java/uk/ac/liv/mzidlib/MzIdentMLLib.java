@@ -246,19 +246,23 @@ public class MzIdentMLLib {
 
             } else if (inputFileName != null) {
                 boolean uncompress = false;
-                File inputFile;
-                // handle the remote files
-                inputFile = FileHandler.handleFile(inputFileName, true, true);
-                inputFileName = inputFile.getAbsolutePath();
+                File inputFile = null;                
+                
+                // handle the remote files i.e. local file copy, only if file ends with mzid or mzid.gz, otherwise use local version
+                if(inputFileName.endsWith("mzid.gz")||inputFileName.endsWith("mzid.gz")){
+                    inputFile = FileHandler.handleFile(inputFileName, true, true);
+                    inputFileName = inputFile.getAbsolutePath();
+                }
+                else {
+                   inputFile = new File(inputFileName);
+                }
                 
                 if (inputFileName.endsWith(".gz")) {
                     inputFile = Gzipper.extractFile(new File(inputFileName));
                     uncompress = true;
 
                 } 
-//                else {
-//                    inputFile = new File(inputFileName);
-//                }
+
                 // Added by FG compress file
                 String compress = Utils.getCmdParameter(args, "compress", false);
                 //set default to "false" if compress parameter is not set:

@@ -249,7 +249,7 @@ public class MzIdentMLLib {
                 File inputFile = null;                
                 
                 // handle the remote files i.e. local file copy, only if file ends with mzid or mzid.gz, otherwise use local version
-                if(inputFileName.endsWith("mzid.gz")||inputFileName.endsWith("mzid.gz")){
+                if(inputFileName.endsWith("mzid.gz")||inputFileName.endsWith("mzid")){
                     inputFile = FileHandler.handleFile(inputFileName, true, true);
                     inputFileName = inputFile.getAbsolutePath();
                 }
